@@ -26,8 +26,8 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Build the Docker image
-        env:  # Set environment variables
-          LOWERCASE_REPO: ${{ github.repository }}  # Use variable for repository name
+        env:
+          LOWERCASE_REPO: ${{ github.repository }}
         run: |
           SHORT_SHA=$(echo "${{ github.sha }}" | cut -c1-7)
           LOWERCASE_REPO=$(echo "$LOWERCASE_REPO" | tr '[:upper:]' '[:lower:]')  # Convert to lowercase
@@ -44,7 +44,11 @@ jobs:
             -t ghcr.io/${LOWERCASE_REPO}:${SHORT_SHA} .
 
       - name: Push the Docker image
+        env:
+          LOWERCASE_REPO: ${{ github.repository }}
         run: |
+          LOWERCASE_REPO=$(echo "$LOWERCASE_REPO" | tr '[:upper:]' '[:lower:]')  # Convert to lowercase
           SHORT_SHA=$(echo "${{ github.sha }}" | cut -c1-7)
+          
           docker push ghcr.io/${LOWERCASE_REPO}:latest
           docker push ghcr.io/${LOWERCASE_REPO}:${SHORT_SHA}
