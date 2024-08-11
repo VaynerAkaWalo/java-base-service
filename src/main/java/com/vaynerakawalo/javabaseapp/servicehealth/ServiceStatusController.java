@@ -13,7 +13,7 @@ public class ServiceStatusController {
     private final long startTime;
     private final Clock clock;
 
-    @Value("${service.version:UNKNOWN}")
+    @Value("${service.version}")
     private String version;
 
     public ServiceStatusController(Clock clock) {
