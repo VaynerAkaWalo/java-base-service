@@ -32,15 +32,15 @@ jobs:
             --build-arg SHORT_SHA=$SHORT_SHA \
             --build-arg GITHUB_TOKEN=${{ secrets.GITHUB_TOKEN }} \
             --build-arg GITHUB_ACTOR=${{ github.actor }} \
-            -t ghcr.io/${{ github.repository }}/java-base-service:latest .
+            -t ghcr.io/${{ github.repository }}:latest .
           docker build \
             --build-arg SHORT_SHA=$SHORT_SHA \
             --build-arg GITHUB_TOKEN=${{ secrets.GITHUB_TOKEN }} \
             --build-arg GITHUB_ACTOR=${{ github.actor }} \
-            -t ghcr.io/${{ github.repository }}/java-base-service:${SHORT_SHA} .
+            -t ghcr.io/${{ github.repository }}:${SHORT_SHA} .
 
       - name: Push the Docker image
         run: |
           SHORT_SHA=$(echo "${{ github.sha }}" | cut -c1-7)
-          docker push ghcr.io/${{ github.repository }}/java-base-service:latest
-          docker push ghcr.io/${{ github.repository }}/java-base-service:${SHORT_SHA}
+          docker push ghcr.io/${{ github.repository }}:latest
+          docker push ghcr.io/${{ github.repository }}:${SHORT_SHA}
