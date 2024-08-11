@@ -33,7 +33,7 @@ jobs:
           LOWERCASE_REPO: ${{ github.repository }}
         run: |
           SHORT_SHA=$(echo "${{ github.sha }}" | cut -c1-7)
-          LOWERCASE_REPO=$(echo "$LOWERCASE_REPO" | tr '[:upper:]' '[:lower:]')  # Convert to lowercase
+          LOWERCASE_REPO=$(echo "$LOWERCASE_REPO" | tr '[:upper:]' '[:lower:]')
           
           docker build \
             --build-arg SHORT_SHA=$SHORT_SHA \
@@ -50,7 +50,7 @@ jobs:
         env:
           LOWERCASE_REPO: ${{ github.repository }}
         run: |
-          LOWERCASE_REPO=$(echo "$LOWERCASE_REPO" | tr '[:upper:]' '[:lower:]')  # Convert to lowercase
+          LOWERCASE_REPO=$(echo "$LOWERCASE_REPO" | tr '[:upper:]' '[:lower:]')
           SHORT_SHA=$(echo "${{ github.sha }}" | cut -c1-7)
           
           docker push ghcr.io/${LOWERCASE_REPO}:latest
